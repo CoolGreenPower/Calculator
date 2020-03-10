@@ -1,0 +1,937 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://embed.carbonquilt.org/embed.nocache.js"></script>
+
+<style>
+    form{
+        borderColor: "blue";
+    }
+    input {
+        text-align: right;
+    }
+    td{
+        vertical-align: top;
+    }
+    label{
+        color:grey;
+    }
+</style>
+<form action="" id="ACCalc" onsubmit="return false;">
+    <fieldset>
+        <legend style = "font-size: 150%;color: #B9CDA4;">Air Conditioning Savings Calculator</legend>
+        <table border = "0" style = "width:100%">
+            <tr>
+                <td>
+                    <select id = "degDay" name = 'degDay'
+                            onchange = "degreeDays()">
+                        <option value = "None">Select Location</option>
+                        <option value = "Alabama , Mobile">Alabama , Mobile</option>
+                        <!option value = "Alaska , Juneau"><!Alaska , Juneau><!/option>
+                        <option value = "Arizona , Phoenix">Arizona , Phoenix</option>
+                        <option value = "Arkansas , Little Rock">Arkansas , Little Rock</option>
+                        <option value = "California , Los Angeles">California , Los Angeles</option>
+                        <option value = "California , Sacramento">California , Sacramento</option>
+                        <option value = "California , San Diego">California , San Diego</option>
+                        <option value = "California , San Francisco">California , San Francisco</option>
+                        <option value = "Colorado , Denver">Colorado , Denver</option>
+                        <option value = "Connecticut , Hartford">Connecticut , Hartford</option>
+                        <option value = "Delaware , Wilmington">Delaware , Wilmington</option>
+                        <option value = "District of Columbia , Washington">District of Columbia , Washington</option>
+                        <option value = "Florida , Jacksonville">Florida , Jacksonville</option>
+                        <option value = "Florida , Miami">Florida , Miami</option>
+                        <option value = "Georgia , Atlanta">Georgia , Atlanta</option>
+                        <option value = "Hawaii , Honolulu">Hawaii , Honolulu</option>
+                        <option value = "Idaho , Boise">Idaho , Boise</option>
+                        <option value = "Illinois , Chicago">Illinois , Chicago</option>
+                        <option value = "Illinois , Peoria">Illinois , Peoria</option>
+                        <option value = "Indiana , Indianapolis">Indiana , Indianapolis</option>
+                        <option value = "Iowa , Des Moines">Iowa , Des Moines</option>
+                        <option value = "Kansas , Wichita">Kansas , Wichita</option>
+                        <option value = "Kentucky , Louisville">Kentucky , Louisville</option>
+                        <option value = "Louisiana , New Orleans">Louisiana , New Orleans</option>
+                        <option value = "Maine , Portland">Maine , Portland</option>
+                        <option value = "Maryland , Baltimore">Maryland , Baltimore</option>
+                        <option value = "Massachusetts , Boston">Massachusetts , Boston</option>
+                        <option value = "Michigan , Detroit">Michigan , Detroit</option>
+                        <option value = "Michigan , Sault Ste. Marie">Michigan , Sault Ste. Marie</option>
+                        <option value = "Minnesota , Duluth">Minnesota , Duluth</option>
+                        <option value = "Minnesota , Minneapolis-St. Paul">Minnesota , Minneapolis-St. Paul</option>
+                        <option value = "Mississippi , Jackson">Mississippi , Jackson</option>
+                        <option value = "Missouri , Buffalo">Missouri , Buffalo</option>
+                        <option value = "Missouri , Kansas City">Missouri , Kansas City</option>
+                        <option value = "Missouri , New York \2">Missouri , New York \2</option>
+                        <option value = "Missouri , St. Louis">Missouri , St. Louis</option>
+                        <option value = "Montana , Great Falls">Montana , Great Falls</option>
+                        <option value = "Nebraska , Omaha">Nebraska , Omaha</option>
+                        <option value = "Nevada , Reno">Nevada , Reno</option>
+                        <option value = "New Hampshire , Concord">New Hampshire , Concord</option>
+                        <option value = "New Jersey , Atlantic City">New Jersey , Atlantic City</option>
+                        <option value = "New Mexico , Albuquerque">New Mexico , Albuquerque</option>
+                        <option value = "New York , Albany">New York , Albany</option>
+                        <option value = "North Carolina , Charlotte">North Carolina , Charlotte</option>
+                        <option value = "North Carolina , Raleigh">North Carolina , Raleigh</option>
+                        <option value = "North Dakota , Bismarck">North Dakota , Bismarck</option>
+                        <option value = "Ohio , Cincinnati">Ohio , Cincinnati</option>
+                        <option value = "Ohio , Cleveland">Ohio , Cleveland</option>
+                        <option value = "Ohio , Columbus">Ohio , Columbus</option>
+                        <option value = "Oklahoma , Oklahoma City">Oklahoma , Oklahoma City</option>
+                        <option value = "Oregon , Portland">Oregon , Portland</option>
+                        <option value = "Pennsylvania , Philadelphia">Pennsylvania , Philadelphia</option>
+                        <option value = "Pennsylvania , Pittsburgh">Pennsylvania , Pittsburgh</option>
+                        <!option value = "Puerto Rico, San Juan"><!Puerto Rico, San Juan</option>
+                        <option value = "Rhode Island , Providence">Rhode Island , Providence</option>
+                        <option value = "South Carolina , Columbia">South Carolina , Columbia</option>
+                        <option value = "South Dakota , Sioux Falls">South Dakota , Sioux Falls</option>
+                        <option value = "Tennessee , Memphis">Tennessee , Memphis</option>
+                        <option value = "Tennessee , Nashville">Tennessee , Nashville</option>
+                        <option value = "Texas , Dallas-Fort Worth">Texas , Dallas-Fort Worth</option>
+                        <option value = "Texas , El Paso">Texas , El Paso</option>
+                        <option value = "Texas , Houston">Texas , Houston</option>
+                        <option value = "Utah , Salt Lake City">Utah , Salt Lake City</option>
+                        <option value = "Vermont , Burlington">Vermont , Burlington</option>
+                        <option value = "Virginia , Norfolk">Virginia , Norfolk</option>
+                        <option value = "Virginia , Richmond">Virginia , Richmond</option>
+                        <option value = "Washington , Seattle-Tacoma">Washington , Seattle-Tacoma</option>
+                        <option value = "Washington , Spokane">Washington , Spokane</option>
+                        <option value = "West Virginia , Charleston">West Virginia , Charleston</option>
+                        <option value = "Wisconsin , Milwaukee">Wisconsin , Milwaukee</option>
+                        <option value = "Wyoming , Cheyenne">Wyoming , Cheyenne</option>
+
+                    </select>
+                    <label></br></label>
+                    <table border = "0" style="width:0%">
+                        <tr>
+                            <td>
+                                <label><span id = "eRate" title = "Selecting a location autofills the average electric rate, Cost of 1 kilowatt">Electric Rate</span></label>
+                            </td>
+                            <td>
+                                <input type = "text" id = "elecRate"
+                                       name = "elecRate" size = "5" value = "" />
+                            </td>
+                        </tr>
+                        <td>
+                            <label><span id="coolDays"  title = "Cooling degree days are an estimate of how much the air conditioner will have to cool every year">Cooling Degree Days</span></label>
+                        </td>
+                        <td>
+                            <input type = "text" id = "degDays"
+                                   name = "degDays" size = "5" value = "" />
+                        </td>
+                        </tr>
+                        <td>
+                            <label id = "HTR" style = "display:none"><span title = "For calculating installation costs">Hourly Technician Rate $</span></label>
+                        </td>
+                        <td>
+                            <input type = "text" id = "htr"
+                                   name = "htr" size = "5" value = "" style = "display:none"/>
+                        </td>
+                        <tr>
+                            <td>
+                                <label></label>
+                                <label id = 'installMats' style = "display:none" >Installation Material/Unit $</label>
+                                <input type = "text" id = "installMat"
+                                       name="installMat"  size = "5" value = "25" style = "display:none" />
+                                <label></label>
+                                <label id = 'HPI' style = "display:none">Hours Per Installation</label>
+                                <input type = "text" id = "hoursInstall"
+                                       name="hoursInstall"  size = "5" value = "1.5" style = "display:none"/>
+                                <label id = "savingsPerc">Average Savings Percentage</label>
+                            </td>
+                            <td>
+                                <input type = "text"  size = "5" id = "savingsPerc"
+                                       name="savingsPerc" value = "30" />
+                                <label>%<br/></label>
+                                <label id = 'AERI' style = "display:none">Annual Elec. Rate Increase</label>
+                                <input type = "text" id = "annEleRatInc"
+                                       name="annEleRatInc"  size = "5" value = "3.0" style = "display:none" />
+                                <label style = "display:none" >% </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <label></br></br></label>
+                    <label><span id = "SysAgeM" title = "To estimate the efficiency class of the system">System Age&emsp; </span>
+                        <span id = "SEERM" title = "Efficiency rating of the system"> SEER&emsp;</span>
+                        <span id = "TonsCoolM" title = "Tons of cooling per system">Tons Of Cooling </span>
+                        <span id = "NumSysM" title = "How many AC systems with this SEER">&emsp;# of Systems</span>
+                        <br>
+                    </label>
+                    <select id = "avgSeer1" name = 'avgSeer1'
+                            onchange = "updateSeer(1)">
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <label>  </label>
+                    <input type = "text" id = "seer1"
+                           name="seer1" size = "4" value = "6"/>
+                    <input type = "text" id = "hpi1"
+                           name="hpi1" size = "7" value = "1.5" style = "display:none"/>
+                    <label id = "sfmt11">&emsp;</label>
+                    <input type = "text" id = "tonsCool1"
+                           name="tonsCool1" value = "5" size = "4"/>
+                    <label id = "sfmt21">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "text" id = "numSys1"
+                           name="numSys1" value = "1" size = "4"/>
+                    <div></div>
+                    <label id = "acLabel2" style = 'display:none;'></label>
+                    <select id = "avgSeer2" name = 'avgSeer2'
+                            onchange = "updateSeer(2)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer2"
+                           name="seer2" size = "4" value = "13" style = "display:none"/>
+
+                    <input type = "hidden" id = "hpi2"
+                           name="hpi2" size = "7" value = "1.5" style = "display:none"/>
+                    <label id = "sfmt12" style = "display:none">&emsp;</label>
+                    <input type = "hidden" id = "tonsCool2"
+                           name="tonsCool2" value = "5" size = "4" style = "display:none"/>
+                    <label id = "sfmt22" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys2"
+                           name="numSys2" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <label id = "acLabel3" style = 'display:none;'></label>
+                    <select id = "avgSeer3" name = 'avgSeer3'
+                            onchange = "updateSeer(3)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer3"
+                           name="seer3" size = "4" value = "13"  style = "display:none"/>
+
+                    <input type = "hidden" id = "hpi3"
+                           name="hpi3" size = "7" value = "1.5" style = "display:none"/>
+                    <label id = "sfmt13" style = "display:none">&emsp;</label>
+                    <input type = "hidden" id = "tonsCool3"
+                           name="tonsCool3" value = "5"  size = "4" style = "display:none"/>
+
+                    <label id = "sfmt23" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys3"
+                           name="numSys3" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <label id = "acLabel4" style = 'display:none;'></label>
+                    <select id = "avgSeer4" name = 'avgSeer4'
+                            onchange = "updateSeer(4)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer4"
+                           name="seer4" size = "4" value = "13" style = "display:none" />
+
+                    <input type = "hidden" id = "hpi4"
+                           name="hpi4" size = "7" value = "1.5"  style = "display:none" />
+                    <label id = "sfmt14" style = "display:none">&emsp;</label>
+                    <input type = "hidden" id = "tonsCool4"
+                           name="tonsCool4" value = "5"  size = "4" style = "display:none"/>
+
+                    <label id = "sfmt24" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys4"
+                           name="numSys4" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <label id = "acLabel5" style = 'display:none;'></label>
+                    <select id = "avgSeer5" name = 'avgSeer5'
+                            onchange = "updateSeer(5)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer5"
+                           name="seer5" size = "4" value = "13" style = "display:none"/>
+
+                    <input type = "hidden" id = "hpi5"
+                           name="hpi5" size = "7" value = "1.5"  style = "display:none" />
+                    <label id = "sfmt15" style = "display:none">&emsp;</label>
+                    <input type = "hidden" id = "tonsCool5"
+                           name="tonsCool5" value = "5"  size = "4" style = "display:none"/>
+
+                    <label id = "sfmt25" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys5"
+                           name="numSys5" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <label id = "acLabel6" style = 'display:none;'></label>
+                    <select id = "avgSeer6" name = 'avgSeer6'
+                            onchange = "updateSeer(6)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer6"
+                           name="seer6" size = "4" value = "13" style = "display:none"/>
+
+                    <input type = "hidden" id = "hpi6"
+                           name="hpi6" size = "7" value = "1.5"  style = "display:none" />
+                    <label id = "sfmt16" style = "display:none">&emsp;</label>
+
+                    <input type = "hidden" id = "tonsCool6"
+                           name="tonsCool6" value = "5"  size = "4" style = "display:none"/>
+                    <label id = "sfmt26" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys6"
+                           name="numSys6" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <label id = "acLabel7" style = 'display:none;'></label>
+                    <select id = "avgSeer7" name = 'avgSeer7'
+                            onchange = "updateSeer(7)" style = 'display:none;'>
+                        <option value = "None">Select Age</option>
+                        <option value = "p1980">Pre 1980</option>
+                        <option value = "1980">1980-1985</option>
+                        <option value = "1986">1986-1991</option>
+                        <option value = "1992">1992-2005</option>
+                        <option value = "2006">2006-2015</option>
+                    </select>
+                    <input type = "hidden" id = "seer7"
+                           name="seer7" size = "4" value = "13"  style = "display:none"/>
+
+                    <input type = "hidden" id = "hpi7"
+                           name="hpi7" size = "7" value = "1.5"  style = "display:none" />
+                    <label id = "sfmt17" style = "display:none">&emsp;</label>
+                    <input type = "hidden" id = "tonsCool7"
+                           name="tonsCool7" value = "5"  size = "4" style = "display:none"/>
+
+                    <label id = "sfmt27" style = "display:none">&emsp;&emsp;&emsp;&emsp;</label>
+                    <input type = "hidden" id = "numSys7"
+                           name="numSys7" value = "1" size = "4" style = "display:none"/>
+
+                    <div></div>
+                    <button type="calc" onclick = "calculate()">Calculate</button>
+                </td>
+                <td>
+                    <label id = "whiteSpace"></br><br><br><br><br><br><br><br></label>
+                    <label></label>
+                    <div id="cost1"></div>
+                    <div id="savings1"></div>
+                    <label><span id="tenYear1" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions1" color = "black"></div>
+                    <div id="analysis1"></div>
+
+                    <div id="cost2"></div>
+                    <div id="savings2"></div>
+                    <label><span id="tenYear2" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions2"></div>
+                    <div id="analysis2"></div>
+
+                    <div id="cost3"></div>
+                    <div id="savings3"></div>
+                    <label><span id="tenYear3" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions3"></div>
+                    <div id="analysis3"></div>
+
+                    <div id="cost4"></div>
+                    <div id="savings4"></div>
+                    <label><span id="tenYear4" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions4"></div>
+                    <div id="analysis4"></div>
+
+                    <div id="cost5"></div>
+                    <div id="savings5"></div>
+                    <label><span id="tenYear5" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions5"></div>
+                    <div id="analysis5"></div>
+
+                    <div id="cost6"></div>
+                    <div id="savings6"></div>
+                    <label><span id="tenYear6" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions6"></div>
+                    <div id="analysis6"></div>
+
+                    <div id="cost7"></div>
+                    <div id="savings7"></div>
+                    <label><span id="tenYear7" title = "Assuming a 3% average annual electric rate increase"></span></label>
+                    <div id="emissions7"></div>
+                    <div id="analysis7"></div>
+                    <label><br/></label>
+                    <div id = "totalsLabel"></div>
+                    <div id = "totalSavings"></div>
+                    <label id = "tenYearLabel" style = "display:none"><span id = "tenYearSavings" title = "Assuming a 3% average annual electric rate increase">Ten Year Savings: $</span></label>
+                    <div id = "totalEmissions"></div>
+                    <button id = "add" type="add" onclick = "addField()"><span title = "Add an AC field"> Add Additional Systems </span></button>
+                    <button id = "remove" type="remove" onclick = "removeField()"><span title = "Remove an AC field"> - </span></button>
+                    <label><br><br></label>
+                    <div id = "messageSent"></div>
+                    <label></br></label>
+                    <button id = "Email" type="Email" onclick = "sendResults()" style = "display:none"> <span title = "Recieve a summary via email">Email Results To Me</span></button>
+                    <input type = "text" id = "emailAddress"
+                           name = "emailAddress" size = "20" value = "" style = "display:none"/>
+                </td>
+            </tr>
+        </table>
+        <label><br/></label>
+    </fieldset>
+</form>
+<script>
+
+    var formData = document.forms["ACCalc"];
+    var numInputs = 1;
+    var maxInputs = 7;
+    var cal = 0;
+    var language = "English";
+
+    //Array for the electrical rates of each location
+    var electricalRates = new Array();
+    electricalRates["None"] = 0;
+    electricalRates["Alabama"] = 0.108;
+    electricalRates["Alaska"] = 0.1797;
+    electricalRates["Arizona"] = 0.1056;
+    electricalRates["Arkansas"] = 0.0827;
+    electricalRates["California"] = 0.1712;
+    electricalRates["Colorado"] = 0.0983;
+    electricalRates["Connecticut"] = 0.1579;
+    electricalRates["Delaware"] = 0.1009;
+    electricalRates["District of Columbia"] = 0.1173;
+    electricalRates["Florida"] = 0.0958;
+    electricalRates["Georgia"] = 0.0962;
+    electricalRates["Hawaii"] = 0.2592;
+    electricalRates["Idaho"] = 0.0771;
+    electricalRates["Illinois"] = 0.0901;
+    electricalRates["Indiana"] = 0.0946;
+    electricalRates["Iowa"] = 0.0874;
+    electricalRates["Kansas"] = 0.0988;
+    electricalRates["Kentucky"] = 0.0937;
+    electricalRates["Louisiana"] = 0.0866;
+    electricalRates["Maine"] = 0.1255;
+    electricalRates["Maryland"] = 0.1087;
+    electricalRates["Massachusetts"] = 0.1522;
+    electricalRates["Michigan"] = 0.1049;
+    electricalRates["Minnesota"] = 0.0955;
+    electricalRates["Mississippi"] = 0.1025;
+    electricalRates["Missouri"] = 0.0863;
+    electricalRates["Montana"] = 0.1013;
+    electricalRates["Nebraska"] = 0.0863;
+    electricalRates["Nevada"] = 0.0913;
+    electricalRates["New Hampshire"] = 0.1442;
+    electricalRates["New Jersey"] = 0.1307;
+    electricalRates["New Mexico"] = 0.1029;
+    electricalRates["New York"] = 0.1526;
+    electricalRates["North Carolina"] = 0.0886;
+    electricalRates["North Dakota"] = 0.09;
+    electricalRates["Ohio"] = 0.101;
+    electricalRates["Oklahoma"] = 0.0772;
+    electricalRates["Oregon"] = 0.0895;
+    electricalRates["Pennsylvania"] = 0.0959;
+    electricalRates["Puerto Rico"] = 0.2061;
+    electricalRates["Rhode Island"] = 0.1457;
+    electricalRates["South Carolina"] = 0.0984;
+    electricalRates["South Dakota"] = 0.0899;
+    electricalRates["Tennessee"] = 0.1017;
+    electricalRates["Texas"] = 0.0759;
+    electricalRates["Utah"] = 0.089;
+    electricalRates["Vermont"] = 0.148;
+    electricalRates["Virginia"] = 0.0806;
+    electricalRates["Washington"] = 0.0835;
+    electricalRates["West Virginia"] = 0.0901;
+    electricalRates["Wisconsin"] = 0.1109;
+    electricalRates["Wyoming"] = 0.0947;
+
+    //Array for the hourly technician rates of each location
+    var techRate = new Array();
+    techRate["None"] = 0;
+    techRate["Alabama"] = 81;
+    techRate["Alaska"] = 68;
+    techRate["Arizona"] = 70;
+    techRate["Arkansas"] = 79;
+    techRate["California"] = 89;
+    techRate["Colorado"] = 70;
+    techRate["Connecticut"] = 87;
+    techRate["Delaware"] = 74;
+    techRate["District of Columbia"] = 91;
+    techRate["Florida"] = 75;
+    techRate["Georgia"] = 87;
+    techRate["Hawaii"] = 57;
+    techRate["Idaho"] = 66;
+    techRate["Illinois"] = 85;
+    techRate["Indiana"] = 81;
+    techRate["Iowa"] = 75;
+    techRate["Kansas"] = 74;
+    techRate["Kentucky"] = 70;
+    techRate["Louisiana"] = 66;
+    techRate["Maine"] = 72;
+    techRate["Maryland"] = 81;
+    techRate["Massachusetts"] = 91;
+    techRate["Michigan"] = 77;
+    techRate["Minnisota"] = 72;
+    techRate["Mississippi"] = 94;
+    techRate["Missouri"] = 79;
+    techRate["Montana"] = 81;
+    techRate["Nebraska"] = 64;
+    techRate["Nevada"] = 74;
+    techRate["New Hampshire"] = 79;
+    techRate["New Jersey"] = 85;
+    techRate["New Mexico"] = 72;
+    techRate["New York"] = 94;
+    techRate["North Carolina"] = 79;
+    techRate["North Dakota"] = 75;
+    techRate["Ohio"] = 75;
+    techRate["Oklahoma"] = 74;
+    techRate["Oregon"] = 75;
+    techRate["Pennsylvania"] = 70;
+    techRate["Puerto Rico"] = 70;
+    techRate["Rhode Island"] = 81;
+    techRate["South Carolina"] = 72;
+    techRate["South Dakota"] = 62;
+    techRate["Tennesse"] = 75;
+    techRate["Texas"] = 75;
+    techRate["Utah"] = 91;
+    techRate["Vermont"] = 75;
+    techRate["Virgin Islands"] = 91;
+    techRate["Virgina"] = 79;
+    techRate["Washington"] = 75;
+    techRate["West Virginia"] = 79;
+    techRate["Wisconsin"] = 70;
+    techRate["Wyoming"] = 74;
+
+    //Array for the cooling degree days of each location
+    var coolingDegreeDays = new Array();
+    coolingDegreeDays["None"] = 0;
+    coolingDegreeDays["Alabama , Mobile"] = 2539;
+    //coolingDegreeDays["Alaska , Juneau"] = 0;
+    coolingDegreeDays["Arizona , Phoenix"] = 4364;
+    coolingDegreeDays["Arkansas , Little Rock"] = 2086;
+    coolingDegreeDays["California , Los Angeles"] = 679;
+    coolingDegreeDays["California , Sacramento"] = 1248;
+    coolingDegreeDays["California , San Diego"] = 866;
+    coolingDegreeDays["California , San Francisco"] = 142;
+    coolingDegreeDays["Colorado , Denver"] = 696;
+    coolingDegreeDays["Connecticut , Hartford"] = 759;
+    coolingDegreeDays["Delaware , Wilmington"] = 1125;
+    coolingDegreeDays["District of Columbia , Washington"] = 1531;
+    coolingDegreeDays["Florida , Jacksonville"] = 2627;
+    coolingDegreeDays["Florida , Miami"] = 4361;
+    coolingDegreeDays["Georgia , Atlanta"] = 1810;
+    coolingDegreeDays["Hawaii , Honolulu"] = 4561;
+    coolingDegreeDays["Idaho , Boise"] = 807;
+    coolingDegreeDays["Illinois , Chicago"] = 830;
+    coolingDegreeDays["Illinois , Peoria"] = 998;
+    coolingDegreeDays["Indiana , Indianapolis"] = 1042;
+    coolingDegreeDays["Iowa , Des Moines"] = 1052;
+    coolingDegreeDays["Kansas , Wichita"] = 1658;
+    coolingDegreeDays["Kentucky , Louisville"] = 1443;
+    coolingDegreeDays["Louisiana , New Orleans"] = 2773;
+    coolingDegreeDays["Maine , Portland"] = 347;
+    coolingDegreeDays["Maryland , Baltimore"] = 1147;
+    coolingDegreeDays["Massachusetts , Boston"] = 777;
+    coolingDegreeDays["Michigan , Detroit"] = 736;
+    coolingDegreeDays["Michigan , Sault Ste. Marie"] = 145;
+    coolingDegreeDays["Minnesota , Duluth"] = 189;
+    coolingDegreeDays["Minnesota , Minneapolis-St. Paul"] = 699;
+    coolingDegreeDays["Mississippi , Jackson"] = 2264;
+    coolingDegreeDays["Missouri , Buffalo"] = 548;
+    coolingDegreeDays["Missouri , Kansas City"] = 1325;
+    coolingDegreeDays["Missouri , New York 2"] = 1151;
+    coolingDegreeDays["Missouri , St. Louis"] = 1561;
+    coolingDegreeDays["Montana , Great Falls"] = 288;
+    coolingDegreeDays["Nebraska , Omaha"] = 1095;
+    coolingDegreeDays["Nevada , Reno"] = 493;
+    coolingDegreeDays["New Hampshire , Concord"] = 442;
+    coolingDegreeDays["New Jersey , Atlantic City"] = 935;
+    coolingDegreeDays["New Mexico , Albuquerque"] = 1290;
+    coolingDegreeDays["New York , Albany"] = 544;
+    coolingDegreeDays["North Carolina , Charlotte"] = 1681;
+    coolingDegreeDays["North Carolina , Raleigh"] = 1521;
+    coolingDegreeDays["North Dakota , Bismarck"] = 471;
+    coolingDegreeDays["Ohio , Cincinnati"] = 1064;
+    coolingDegreeDays["Ohio , Cleveland"] = 702;
+    coolingDegreeDays["Ohio , Columbus"] = 951;
+    coolingDegreeDays["Oklahoma , Oklahoma City"] = 1907;
+    coolingDegreeDays["Oregon , Portland"] = 390;
+    coolingDegreeDays["Pennsylvania , Philadelphia"] = 1235;
+    coolingDegreeDays["Pennsylvania , Pittsburgh"] = 726;
+    coolingDegreeDays["Puerto Rico, San Juan"] = 5,426;
+    coolingDegreeDays["Rhode Island , Providence"] = 714;
+    coolingDegreeDays["South Carolina , Columbia"] = 2074;
+    coolingDegreeDays["South Dakota , Sioux Falls"] = 747;
+    coolingDegreeDays["Tennessee , Memphis"] = 2187;
+    coolingDegreeDays["Tennessee , Nashville"] = 1652;
+    coolingDegreeDays["Texas , Dallas-Fort Worth"] = 2568;
+    coolingDegreeDays["Texas , El Paso"] = 2254;
+    coolingDegreeDays["Texas , Houston"] = 2893;
+    coolingDegreeDays["Utah , Salt Lake City"] = 1066;
+    coolingDegreeDays["Vermont , Burlington"] = 489;
+    coolingDegreeDays["Virginia , Norfolk"] = 1612;
+    coolingDegreeDays["Virginia , Richmond"] = 1435;
+    coolingDegreeDays["Washington , Seattle-Tacoma"] = 173;
+    coolingDegreeDays["Washington , Spokane"] = 394;
+    coolingDegreeDays["West Virginia , Charleston"] = 978;
+    coolingDegreeDays["Wisconsin , Milwaukee"] = 616;
+    coolingDegreeDays["Wyoming , Cheyenne"] = 273;
+
+    //Array for the SEER of each age
+    var seerAgeAr = new Array();
+    seerAgeAr["None"]=0;
+    seerAgeAr["p1980"]=6;
+    seerAgeAr["1980"]=7;
+    seerAgeAr["1986"]=8;
+    seerAgeAr["1992"]=10;
+    seerAgeAr["2006"]=13;
+    seerAgeAr["high"]=15;
+    seerAgeAr["very"]=17;
+
+    //array for messages in multiple languages
+    var message = new Array();
+    message["EnglishSelectLocation"] = "Select location";
+    message["EnglishElectricRate"] ="Electric Rate";
+    message["EnglishElectricRateSpan"] ="Selecting a location autofills the average electric rate";
+    message["EnglishCoolingDays"] ="Cooling Degree Days";
+    message["EnglishCoolingDaysSpan"] ="";
+    message["EnglishHourlyTech"] ="Hourly Technician Rate $";
+    message["EnglishHourlyTechSpan"] ="For calculating installation costs";
+    message["EnglishInstallMats"] ="Installation Material/Unit $";
+    message["EnglishHPI"] ="Hours Per Installation";
+    message["EnglishAnnualSavingsPerc"] ="Average Savings Percentage";
+    message["EnglishElecRateInc"] ="Annual Elec. Rate Increase";
+
+    message["EnglishACAge"] = "&emsp;Sys Age&emsp; &emsp;  ";
+    message["EnglishACSEER"] = "SEER&emsp;";
+    message["EnglishACTonsCool"] = "Tons Of Cooling&emsp;&emsp;&emsp;";
+    message["EnglishACNumSys"] = "Number of Systems";
+
+    message["EnglishACAgeSpan"] = "To estimate the efficiency class of the system";
+    message["EnglishACSEERSpan"] = "Efficiency rating of the system";
+    message["EnglishACTonsCoolSpan"] = "Tons of cooling per system";
+    message["EnglishACNumSysSpan"] = "How many AC systems with this SEER";
+
+    message["EnglishAnnualSavings"] = "First Year Savings: $";
+    message["EnglishEmissionsReduced"] = "Tons of Emissions Reduced Per Year: ";
+    message["EnglishSummaryBody"] = "Thank you for using the CoolGreenPower Air Conditioning Calculator.  Your inputs were: <br>Location: ";
+
+    message["EnglishTotalsMessage"]= "Total Savings"
+    message["EnglishTenYearSavings"] = "Ten Year Savings: $";
+    //Gets the given message in the current language
+    function getMessage(mName){
+        return message[(language + mName)];
+    }
+
+    //Updates the language based on the drop down selection
+    function changeLanguage(){
+        language = formData.elements["language"].value;
+
+        document.getElementById('selLoc').innerHTML = getMessage("SelectLocation");
+        document.getElementById('eRate').innerHTML = getMessage("ElectricRate");
+        document.getElementById('eRate').title = getMessage("ElectricRateSpan");
+        document.getElementById('coolDays').innerHTML = getMessage("CoolingDays");
+        document.getElementById('coolDays').title = getMessage("CoolingDaysSpan");
+        document.getElementById('HTR').innerHTML = getMessage("HourlyTech");
+        document.getElementById('HTR').title = getMessage("HourlyTechSpan");
+        document.getElementById('savingsPerc').innerHTML = getMessage("AnnualSavingsPerc");
+
+        document.getElementById('SysAgeM').innerHTML = getMessage("ACAge");
+        document.getElementById('SEERM').innerHTML = getMessage("ACSEER");
+        document.getElementById('TonsCoolM').innerHTML = getMessage("ACTonsCool");
+        document.getElementById('NumSysM').innerHTML = getMessage("ACNumSys");
+
+        document.getElementById('SysAgeM').title = getMessage("ACAgeSpan");
+        document.getElementById('SEERM').title = getMessage("ACSEERSpan");
+        document.getElementById('TonsCoolM').title = getMessage("ACTonsCoolSpan");
+        document.getElementById('NumSysM').title = getMessage("ACNumSysSpan");
+
+        for(n=1;n<maxInputs;n++){
+            if(cal>=n){
+                var annualSavings = calAnnualSavings(n);
+                document.getElementById('savings' + n).innerHTML = getMessage("AnnualSavings") + annualSavings.toFixed(0);
+                var emissionsReduced = calEmissions(n);
+                document.getElementById('emissions' + n).innerHTML =  getMessage("EmissionsReduced") + emissionsReduced.toFixed(0);
+            }
+        }
+
+    }
+
+    //Updates the text field next to degree days when location picked
+    function degreeDays(){
+        var degDayLoc = formData.elements["degDay"];
+        var inputs = degDayLoc.value.split(" ,");
+        document.getElementById('elecRate').value = electricalRates[inputs[0]].toFixed(3);
+        document.getElementById('htr').value = techRate[inputs[0]].toFixed(0);
+        document.getElementById('degDays').value = coolingDegreeDays[degDayLoc.value];
+    }
+
+    //Updates the text field for SEER based on the age dropdown
+    function updateSeer(n){
+        var seerAge = formData.elements["avgSeer" + n];
+        document.getElementById('seer' + n).value = seerAgeAr[seerAge.value];
+    }
+
+    //Adds another AC Field up to the preset maximum
+    function addField(){
+        if(numInputs < maxInputs){
+            numInputs ++;
+            document.getElementById('acLabel' + numInputs).style.display = 'inline';
+            document.getElementById('avgSeer' + numInputs).style.display = 'inline';
+            document.getElementById('seer' + numInputs).type = 'text';
+            document.getElementById('hpi' + numInputs).type = 'text';
+            document.getElementById('tonsCool' + numInputs).type = 'text';
+            document.getElementById('numSys' + numInputs).type = 'text';
+            document.getElementById('sfmt1' + numInputs).style.display = 'inline';
+            document.getElementById('sfmt2' + numInputs).style.display = 'inline';
+            document.getElementById('avgSeer' + numInputs).style.display = 'inline';
+            document.getElementById('seer' + numInputs).style.display = 'inline';
+            document.getElementById('tonsCool' + numInputs).style.display = 'inline';
+            document.getElementById('numSys' + numInputs).style.display = 'inline';
+            if(numInputs == maxInputs){
+                //	document.getElementById('add').style.display = 'none';
+            }
+        }
+        else{
+            return;
+        }
+    }
+
+    //Hides an AC field unless only 1 remains
+    function removeField(){
+        document.getElementById('totalsLabel').innerHTML = "";
+        document.getElementById('totalSavings').innerHTML = "";
+        document.getElementById('totalEmissions').innerHTML = "";
+        document.getElementById('tenYearSavings').innerHTML = "";
+        document.getElementById('tenYearLabel').style = "display:inline";
+        if(numInputs > 1){
+            document.getElementById('acLabel' + numInputs).style.display = 'none';
+            document.getElementById('avgSeer' + numInputs).style.display = 'none';
+            document.getElementById('seer' + numInputs).type = 'hidden';
+            document.getElementById('hpi' + numInputs).type = 'hidden';
+            document.getElementById('tonsCool' + numInputs).type = 'hidden';
+            document.getElementById('numSys' + numInputs).type = 'hidden';
+            document.getElementById('sfmt1' + numInputs).style.display = 'none';
+            document.getElementById('sfmt2' + numInputs).style.display = 'none';
+            document.getElementById('sseer' + numInputs).style.display = 'none';
+            document.getElementById('stonsCool' + numInputs).style.display = 'none';
+            document.getElementById('snumSys' + numInputs).style.display = 'none';
+
+            document.getElementById('savings' + numInputs).innerHTML = "";
+            document.getElementById('emissions' + numInputs).innerHTML = "";
+            document.getElementById('tenYear' + numInputs).innerHTML = "";
+            if(numInputs == maxInputs){
+                document.getElementById('add').style.display = 'inline';
+            }
+            numInputs--;
+            cal--;
+        }
+        else{
+            return;
+        }
+    }
+
+    //Parses html text inputs with the given id to int
+    function getValue(id){
+        var gValue = 0;
+        var fData = formData.elements[id];
+        if(fData.value!=""){
+            gValue = parseFloat(fData.value);
+        }
+        return gValue;
+    }
+
+    //Adds commas every 3 digits in a number
+    function addCommas(n){
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+    }
+
+    //Calculates the annual savings based on the SEER rating
+    function calAnnualSavings(n){
+        var seer = getValue("seer" + n);
+        var aSP = getValue("savingsPerc");
+        var tonsCooling = getValue("tonsCool" + n);
+        var degDays = getValue("degDays");
+        var btuHour = tonsCooling * 12000;
+        var btuYear = btuHour * degDays;
+        var kwhYear = (btuYear/ seer)/1000;
+        var eRate = getValue("elecRate");
+        var totalOpCost = kwhYear *eRate;
+        var numUnits = getValue("numSys" + n);
+        if(seer>13){
+            return numUnits* totalOpCost*(aSP-5)/100;
+        }
+        else{
+            return numUnits* totalOpCost*(aSP)/100;
+        }
+    }
+
+    //Calculates the tons of emissions per year reduced
+    function calEmissions(n){
+        var numUnits = getValue("numSys" + n);
+        var seer = getValue("seer" + n);
+        var aSP = getValue("savingsPerc");
+        var tonsCooling = getValue("tonsCool" + n);
+        var degDays = getValue("degDays");
+        var btuHour = tonsCooling * 12000;
+        var btuYear = btuHour * degDays;
+        var kwhYear = (btuYear/ seer)/1000;
+        var kwhSaved = kwhYear * (aSP/100);
+        var lCarbon = (9168/1000)*kwhSaved;
+        var lSulfur = (18/1000) * lCarbon;
+        var lNitrogen = (7/1000) *lSulfur;
+        return numUnits*((lCarbon + lSulfur + lNitrogen)/2000);
+    }
+
+    //Calculates the total savings over 10 years with the given electric rate increase
+    function tenYear(n,increase){
+        var total = 0;
+        for(i = 0;i<10;i++){
+            total += (n * Math.pow((1+increase),i));
+        }
+        return total;
+    }
+
+    //Runs helper functions to calculate everything
+    function calculate(){
+        var totalEmissions = 0;
+        var totalAnnualSavings = 0;
+        for(var n=1;n<=numInputs;n++){
+            var annualSavings = calAnnualSavings(n);
+            totalAnnualSavings += annualSavings;
+            document.getElementById('savings' + n).innerHTML = "SEER: " + getValue("seer" + n) + " Tons of Cooling: " + getValue("tonsCool" + n) + " Number of Units: " + getValue("numSys" + n) + "<br>" + getMessage("AnnualSavings") +
+                "<strong>" +  addCommas(annualSavings.toFixed(0))+ "</strong>";
+            document.getElementById('savings' + n).style = "Color:Black";
+            var emissionsReduced = calEmissions(n);
+            totalEmissions += emissionsReduced;
+            document.getElementById('emissions' + n).innerHTML =  getMessage("EmissionsReduced")
+                + "<strong>" + addCommas(emissionsReduced.toFixed(0))+ "</strong>";
+            document.getElementById('emissions' + n).style = "Color:Black";
+            document.getElementById('tenYear' + n).style = "display:inline";
+            document.getElementById('tenYear' + n).innerHTML = getMessage("TenYearSavings") + "<strong>" + addCommas(tenYear(annualSavings,.03).toFixed(0)) + "</strong>";
+            document.getElementById('tenYear' + n).style = "Color:Black";
+            document.getElementById('analysis' + n).innerHTML = "<br>"
+        }
+        document.getElementById('totalsLabel').innerHTML = getMessage("TotalsMessage");
+        document.getElementById('totalsLabel').style = "Color:Black";
+        document.getElementById('totalSavings').innerHTML = getMessage("AnnualSavings") + "<strong>" + addCommas(totalAnnualSavings.toFixed(0)) + "</strong>";
+        document.getElementById('totalSavings').style = "Color:Black";
+        document.getElementById('tenYearLabel').style = "display:inline";
+        document.getElementById('tenYearSavings').innerHTML = getMessage("TenYearSavings") + "<strong>" + addCommas(tenYear(totalAnnualSavings,.03).toFixed(0)) + "</strong>";
+        document.getElementById('tenYearSavings').style = "Color:Black";
+        document.getElementById('totalEmissions').innerHTML = "Ten Year Emissions Reduced: " + "<strong>" + addCommas((10*totalEmissions).toFixed(0)) + "</strong>" + " tons";
+        document.getElementById('totalEmissions').style = "Color:Black";
+        cal = n-1;
+
+        document.getElementById('Email').style = "display:inline"
+        document.getElementById('emailAddress').style = "display:inline"
+        document.getElementById('messageSent').innerHTML = "";
+
+        document.getElementById('whiteSpace').innerHTML = "";
+    }
+
+    //Puts the calculator results into a text format
+    function summarize(){
+        var summary = "";
+        var totalAnnual = 0;
+        var totalEmissions = 0;
+
+        for(var n = 1;n<=numInputs;n++){
+            var annualSavings = calAnnualSavings(n);
+            var emissionsReduced = calEmissions(n);
+            summary = summary + "<br>AC" + n + ": SEER: " + getValue("seer" + n)
+                + " Tons Of Cooling: "
+                + getValue("tonsCool" + n)
+                + " Number Of Systems: " + getValue("numSys" + n) + "<br>   "
+                + getMessage("AnnualSavings")
+                + addCommas(annualSavings.toFixed(0))
+                + "<br>" + "Ten Year Savings: $"
+                + addCommas(tenYear(annualSavings,0.03).toFixed(0))
+                + "<br>   " + getMessage("EmissionsReduced")
+                + addCommas(emissionsReduced.toFixed(0)) + "<br>";
+            totalAnnual +=annualSavings;
+            totalEmissions += emissionsReduced;
+        }
+        summary = summary + "<br><br> TOTALS: <br>Total First Year Savings: $" + addCommas(totalAnnual.toFixed(0))
+            + "<br> Ten Year Savings: $" + addCommas(tenYear(totalAnnual,.03).toFixed(0))
+            + "<br> Total Tons of Emissions Reduced: " + addCommas(totalEmissions.toFixed(0));
+        return summary;
+    }
+
+    function validEmail(text) {
+        var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+        return re.test(text);
+    }
+
+    var reader = new FileReader;
+    reader.onload = function(event) {
+        text.value = event.target.result;
+        button.disabled = false;
+    }
+
+
+    function storeInfo(){
+        var name = document.getElementById('name').value;
+        var body = "Name: " +  name + "\n Company: " + document.getElementById('company').value + "\n Email:"
+            + document.getElementById('emailAddress').value + "\n Phone Number:"
+            + document.getElementById('phone').value + "\n Charity:"
+            + document.getElementById('charity').value + "\n Address:"
+            + document.getElementById('address').value + "\n";
+        //e.preventDefault();
+        var blob = new Blob([body], {
+            "type": "application/json"
+        });
+        var a = document.createElement("a");
+        a.download = name + ".txt";
+        a.href = URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        // text.value = "";
+        // input.value = "";
+        document.body.removeChild(a);
+
+    }
+
+    //Function to email the calcultor results
+    function sendResults(){
+        var email = document.getElementById('emailAddress').value;
+        if (validEmail(email)){
+            var key = 'WWRVm63jNPVpeyZQM2KqjA';
+            var fromEmail = 'calculator@coolgreenpower.com';
+            var url = "https://mandrillapp.com/api/1.0/messages/send.json"
+            var summary = summarize();
+            var body = "<font face = 'Lucida Sans Unicode' >" + getMessage("SummaryBody")
+                + "<br>" + formData.elements["degDay"].value
+                + "<br>Electric Rate: " + getValue("elecRate") +
+                "<br>Average Savings Percentage: " + getValue("savingsPerc")
+                + "<br><br> Here are your results:<br><br>" + summary +
+                "<br><br>Start saving today! Visit our <a href='https://www22.corecommerce.com/~coolnomixusa/login.php?m=client_login&go=http%3A%2F%2Fcoolnomixusa.corecommerce.com%2Fcart.php%3F'>store</a>.";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'key': key,
+                    'message': {
+                        'from_email': fromEmail,
+                        'to': [
+                            {
+                                'email': email,
+                                'name': '',
+                                'type': 'to'
+                            }
+                        ],
+                        'subject': 'CoolGreenPower AC Calculator',
+                        'html': body
+                    }
+                }
+            });
+            document.getElementById('messageSent').innerHTML = "Results Sent to " + email;
+            document.getElementById('emailAddress').style = "display:none"
+            document.getElementById('Email').style = "display:none"
+        }
+        else{
+            document.getElementById('messageSent').innerHTML = "Invalid Email!";}
+    }
+
+</script>
