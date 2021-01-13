@@ -78,14 +78,14 @@ class Customer {
         if (this.allValid()) {
             let resultsString = '';
             this.calculateSavings();
-            resultsString += '<h4>Annual Savings:</h4>' +
-                '<p>Total financial savings are $' +
+            resultsString += '<h4>Annual Reductions:</h4>' +
+                '<p>Total cost reduction is $' +
                 this.convertDollar(this._totalCostSavings) +
                 '<p>Total energy reduction is ' +
                 this._totalEnergySavings.toFixed(0) +
                 ' kWh</p><p>Total greenhouse gas reduction is ' +
                 this._totalCO2Reduction.toFixed(2) +
-                ' tons of CO2</p><h4>10 Year Projections:</h4><p>Total financial savings are $' +
+                ' tons of CO2</p><h4>10 Year Projections:</h4><p>Total cost reduction is $' +
                 this.convertDollar(this._totalCostSavings * this._tenYearCumulative) +
                 '</p><p>Total energy reduction is ' +
                 (this._totalEnergySavings * 10).toFixed(0) +
