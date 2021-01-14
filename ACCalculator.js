@@ -202,7 +202,7 @@ class FridgeCustomer extends Customer {
     initialDisplay() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.downloadSizes();
-            this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost savings with COOLNOMIX on your refrigeration system!');
+            this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost reduction with COOLNOMIX on your refrigeration system!');
             this.addInteractive();
         });
     }
@@ -336,7 +336,7 @@ class ACCustomer extends Customer {
         return this._daysOfOperation;
     }
     initialDisplay() {
-        this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost savings with COOLNOMIX on your air conditioning system!');
+        this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost reduction with COOLNOMIX on your air conditioning system!');
         this.addInteractive();
     }
     makeHTML(results) {
@@ -564,14 +564,14 @@ class CoolGreenDisplay {
             // Configure series
             this.polygonTemplate = this.polygonSeries.mapPolygons.template;
             this.polygonTemplate.tooltipText = "{name}";
-            this.polygonTemplate.fill = am4core.color("#9ee0be");
+            this.polygonTemplate.fill = am4core.color("#4eb69b");
             // Create image series
             this.imageSeries = this.chart.series.push(new am4maps.MapImageSeries());
             // Create a circle image in image series template so it gets replicated to all new images
             this.imageSeriesTemplate = this.imageSeries.mapImages.template;
             this.circle = this.imageSeriesTemplate.createChild(am4core.Circle);
-            this.circle.radius = 6;
-            this.circle.fill = am4core.color("#e03e96");
+            this.circle.radius = 5;
+            this.circle.fill = am4core.color("#d65b39");
             this.circle.nonScaling = true;
             this.circle.tooltipText = "{title}";
             // Set property fields
