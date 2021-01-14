@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 // contains data that holds for every customer. One of fridge or ac customer
 class Customer {
     constructor() {
@@ -45,7 +46,7 @@ class Customer {
             ' <p></p>' +
             '        <div class="row" id="systems">\n' +
             '            <div class="col-sm-3 m-4" id="addSection">\n' +
-            '                <button id="add">add system</button>\n' +
+            '                <button id="add">Add System</button>\n' +
             '            </div>\n' +
             '</div>' +
             '<div class="row">' +
