@@ -104,7 +104,7 @@ class Customer {
             });
         }
         else {
-            $("#results").html("Please select a city from the map and add a system.");
+            $("#results").html("Please select a city from the map or insert your own data and add a system.");
         }
     }
     get kWhPrice() {
@@ -337,7 +337,7 @@ class ACCustomer extends Customer {
         return this._daysOfOperation;
     }
     initialDisplay() {
-        this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost reduction with COOLNOMIX on your air conditioning system!');
+        this.startingHTML('Select a city from the map or insert your own data. Then add systems to estimate your cost reduction with COOLNOMIX® on your air conditioning system!');
         this.addInteractive();
     }
     makeHTML(results) {
