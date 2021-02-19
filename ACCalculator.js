@@ -81,30 +81,30 @@ class Customer {
             this.calculateSavings();
             resultsString += '<h4>Annual Reductions:</h4>' +
                 '<p>Total cost reduction is $' +
-                this.convertDollar(this._totalCostSavings) +
-                '<p>Total energy reduction is ' +
-                this._totalEnergySavings.toFixed(0) +
+                this.convertDollar(this._totalCostSavings) + '.' +
+                '<p>Total energy reduction is ' + 
+                this._totalEnergySavings.toFixed(0) + '.' +
                 ' kWh</p><p>Total greenhouse gas reduction is ' +
-                this._totalCO2Reduction.toFixed(2) +
+                this._totalCO2Reduction.toFixed(2) + '.' +
                 ' tons of CO2</p><h4>10 Year Projections:</h4><p>Total cost reduction is $' +
-                this.convertDollar(this._totalCostSavings * this._tenYearCumulative) +
+                this.convertDollar(this._totalCostSavings * this._tenYearCumulative) + '.' +
                 '</p><p>Total energy reduction is ' +
-                (this._totalEnergySavings * 10).toFixed(0) +
+                (this._totalEnergySavings * 10).toFixed(0) + '.' +
                 ' KwH</p><p>Total greenhouse gas reduction is ' +
                 (this._totalCO2Reduction * 10).toFixed(2) +
-                ' tons of CO2</p>';
+                ' tons of CO2</p>' + '.';
             $("#results").html(resultsString);
             $('#results').append('<div id="email">' +
                 '<p>Would you like to email the results?</p>' +
                 '    <input type="text" id="emailAddress" name="emailAddress"></input>\n' +
-                '<button id="sendEmail">send email</button>' +
+                '<button id="sendEmail">Send Email</button>' +
                 ' </div><p id="sent"></p>');
             $('#sendEmail').click(() => {
                 Emailer.sendResults(this.makeHTML(resultsString), 'CoolGreenPower Calculator');
             });
         }
         else {
-            $("#results").html("Missing Information");
+            $("#results").html("Please select a city from the map and add a system.");
         }
     }
     get kWhPrice() {
