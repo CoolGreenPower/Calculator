@@ -37,7 +37,7 @@ class Customer {
             '<p>' + description + '</p>' +
             '    <div class="row">\n' +
             '        <div class="col-sm-7" id="map">\n' +
-            '            <div id="chartdiv" style="height: 35vh;"></div>\n' +
+            '            <div id="chartdiv"></div>\n' +
             '        </div>\n' +
             '        <div class="col-sm-4 m-3" id="sliders">\n' +
             '<h5 id="location"></h5>' +
