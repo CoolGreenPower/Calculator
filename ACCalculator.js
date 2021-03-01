@@ -561,7 +561,6 @@ class CoolGreenDisplay {
         this.chart.zoomControl = new am4maps.ZoomControl();
         // remove auto-resizing
         this.chart.svgContainer.autoResize = false;
-        this.chart.preloader.enabled = true;
         // Create map polygon series
         this.polygonSeries = this.chart.series.push(new am4maps.MapPolygonSeries());
         this.polygonSeries.useGeodata = true;
